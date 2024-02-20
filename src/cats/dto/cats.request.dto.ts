@@ -1,15 +1,12 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { OmitType, PickType } from '@nestjs/swagger';
+import { Cat } from '../cats.schema';
 
-export class CatRequestDto {
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
+// cf. Remove only unnecessary fields using OmitType
+// export class CatRequestDto extends OmitType(Cat, ['imgUrl'] as const) {}
 
-  @IsString()
-  @IsNotEmpty()
-  password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  name: string;
-}
+// Use only the fields you need using PickType
+export class CatRequestDto extends PickType(Cat, [
+  'email',
+  'password',
+  'name',
+] as const) {}

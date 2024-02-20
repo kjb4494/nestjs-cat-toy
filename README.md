@@ -41,10 +41,23 @@ NestJs 공부용 토이 프로젝트
   ```
 
 - Added Modules
+
   - **[_mongoose_](https://mongoosejs.com/docs/index.html)**: `yarn add @nestjs/mongoose mongoose`
   - **nest-js/config**: `yarn add @nestjs/config`
   - **validation**: `yarn add class-validator class-transformer`
   - **bcrypt**: `yarn add bcrypt`, `yarn add --dev @types/bcrypt`
+  - **[_swagger_](https://docs.nestjs.com/openapi/introduction#installation)**: `yarn add @nestjs/swagger`
+
+- .env
+
+```text
+MONGO_URI=mongodb://localhost:27017
+MONGO_USERNAME=admin
+MONGO_PASSWORD=P@ssw0rd
+MONGO_DBNAME=catdb
+
+MODE='dev'
+```
 
 ## MongoDB
 
