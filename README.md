@@ -41,6 +41,7 @@ NestJs 공부용 토이 프로젝트
   ```
 
 - Added Modules
+  - **[_mongoose_](https://mongoosejs.com/docs/index.html)**: `yarn add @nestjs/mongoose mongoose`
 
 ## MongoDB
 
@@ -85,3 +86,7 @@ $ yarn run test:e2e
 # test coverage
 $ yarn run test:cov
 ```
+
+## Ref
+
+- [_git code ref_](https://github.com/amamov/teaching-nestjs-a-to-z)
