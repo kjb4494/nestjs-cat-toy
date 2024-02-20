@@ -42,6 +42,9 @@ NestJs 공부용 토이 프로젝트
 
 - Added Modules
   - **[_mongoose_](https://mongoosejs.com/docs/index.html)**: `yarn add @nestjs/mongoose mongoose`
+  - **nest-js/config**: `yarn add @nestjs/config`
+  - **validation**: `yarn add class-validator class-transformer`
+  - **bcrypt**: `yarn add bcrypt`, `yarn add --dev @types/bcrypt`
 
 ## MongoDB
 
