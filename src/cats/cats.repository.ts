@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Cat } from './cats.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { CatRequestDto } from './dto/cats.request.dto';
 
 @Injectable()
@@ -27,15 +27,26 @@ export class CatsRepository {
     return cat;
   }
 
-  async findCatByIdWithoutPassword(id: string): Promise<Cat | null> {
+  async findCatByIdWithoutPassword(
+    id: string | Types.ObjectId,
+  ): Promise<Cat | null> {
+    // valid id
+    if (!Types.ObjectId.isValid(id)) {
+      return null;
+    }
     // select without password
     const cat = await this.catModel.findById(id).select('-password');
     return cat;
   }
 
-  async findByIdAndUpdateImg(id: string, fileName: string) {
+  async findByIdAndUpdateImg(id: string | Types.ObjectId, fileName: string) {
+    // valid id
+    if (!Types.ObjectId.isValid(id)) {
+      return null;
+    }
+
     const cat = await this.catModel.findById(id);
-    cat.imgUrl = `http://localhost:3000/media/${fileName}`;
+    cat.imgUrl = `${process.env.MEDIA_PATH}${fileName}`;
     const newCat = await cat.save();
     return newCat.readOnlyData;
   }

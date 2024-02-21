@@ -9,7 +9,12 @@ import {
 } from '@nestjs/common';
 import { CatsService } from '../services/cats.service';
 import { CatRequestDto } from '../dto/cats.request.dto';
-import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ReadOnlyCatDto } from '../dto/cat.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
@@ -20,6 +25,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'src/common/utils/multer.options';
 import { ApiFile } from 'src/common/decorators/api-file.decorator';
 
+@ApiTags('cats')
 @Controller('/api/v1/cats')
 export class CatsController {
   constructor(
