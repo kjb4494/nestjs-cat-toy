@@ -5,6 +5,7 @@ import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './common/middleswares/logger.middleware';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 import mongoose from 'mongoose';
 
 @Module({
@@ -21,6 +22,7 @@ import mongoose from 'mongoose';
       inject: [ConfigService],
     }),
     CatsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

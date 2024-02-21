@@ -47,6 +47,9 @@ NestJs 공부용 토이 프로젝트
   - **validation**: `yarn add class-validator class-transformer`
   - **bcrypt**: `yarn add bcrypt`, `yarn add --dev @types/bcrypt`
   - **[_swagger_](https://docs.nestjs.com/openapi/introduction#installation)**: `yarn add @nestjs/swagger`
+  - **[_jwt_](https://docs.nestjs.com/security/authentication#jwt-token)**: `yarn add @nestjs/jwt`
+  - **[_passport-jwt_](https://docs.nestjs.com/recipes/passport#jwt-functionality)**: `yarn add passport-jwt`, `yarn add --dev @types/passport-jwt`
+  - **[_passport_](https://docs.nestjs.com/recipes/passport#authentication-requirements)**: `yarn add @nestjs/passport passport passport-local`, `yarn add --dev @types/passport-local`
 
 - .env
 
