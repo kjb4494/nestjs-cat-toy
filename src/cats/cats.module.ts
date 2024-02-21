@@ -6,6 +6,7 @@ import { Cat, CatSchema } from './cats.schema';
 import { CatsRepository } from './cats.repository';
 import { AuthModule } from 'src/auth/auth.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { Comments, CommentsSchema } from 'src/comments/comments.schema';
 
 @Module({
   imports: [
@@ -13,7 +14,10 @@ import { MulterModule } from '@nestjs/platform-express';
     MulterModule.register({
       dest: './upload',
     }),
-    MongooseModule.forFeature([{ name: Cat.name, schema: CatSchema }]),
+    MongooseModule.forFeature([
+      { name: Comments.name, schema: CommentsSchema },
+      { name: Cat.name, schema: CatSchema },
+    ]),
     // https://docs.nestjs.com/fundamentals/circular-dependency#module-forward-reference
     forwardRef(() => AuthModule),
   ],

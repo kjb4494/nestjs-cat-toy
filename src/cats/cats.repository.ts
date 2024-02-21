@@ -1,16 +1,22 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Cat } from './cats.schema';
 import { Model, Types } from 'mongoose';
 import { CatRequestDto } from './dto/cats.request.dto';
+import { CommentsSchema } from 'src/comments/comments.schema';
+import * as mongoose from 'mongoose';
 
 @Injectable()
 export class CatsRepository {
   constructor(@InjectModel(Cat.name) private readonly catModel: Model<Cat>) {}
 
-  async findAll(): Promise<Array<Cat>> {
-    const cats = await this.catModel.find();
-    return cats;
+  async findAll() {
+    const commentsModel = mongoose.model('comments', CommentsSchema);
+    // https://mongoosejs.com/docs/populate.html
+    const catsWithComments = await this.catModel
+      .find()
+      .populate('comments', commentsModel);
+    return catsWithComments;
   }
 
   async existsByEmail(email: string): Promise<boolean> {
