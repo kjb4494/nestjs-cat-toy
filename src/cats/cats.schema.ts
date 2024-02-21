@@ -83,7 +83,7 @@ _CatSchema.virtual('readOnlyData').get(function (this: Cat) {
 
 // virtual data added comments
 _CatSchema.virtual('comments', {
-  ref: 'comments',
+  ref: 'Comments', // MongooseModule.forFeature에서 사용하는 Comments.name 값과 일치해야함
   localField: '_id',
   foreignField: 'info',
 });
