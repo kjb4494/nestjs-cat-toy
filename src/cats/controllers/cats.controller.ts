@@ -7,15 +7,15 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { CatsService } from './cats.service';
-import { CatRequestDto } from './dto/cats.request.dto';
+import { CatsService } from '../services/cats.service';
+import { CatRequestDto } from '../dto/cats.request.dto';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { ReadOnlyCatDto } from './dto/cat.dto';
+import { ReadOnlyCatDto } from '../dto/cat.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
-import { Cat } from './cats.schema';
+import { Cat } from '../cats.schema';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'src/common/utils/multer.options';
 import { ApiFile } from 'src/common/decorators/api-file.decorator';
@@ -27,10 +27,16 @@ export class CatsController {
     private readonly authService: AuthService,
   ) {}
 
+  @ApiOperation({ summary: '모든 고양이 가져오기' })
+  @Get()
+  getAllCats() {
+    return this.catsService.getAllCats();
+  }
+
   @ApiOperation({ summary: '현재 고양이 가져오기' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  @Get()
+  @Get('current')
   getCurrentCat(@CurrentUser() cat: Cat) {
     return cat.readOnlyData;
   }
