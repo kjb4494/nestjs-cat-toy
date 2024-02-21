@@ -50,6 +50,7 @@ NestJs 공부용 토이 프로젝트
   - **[_jwt_](https://docs.nestjs.com/security/authentication#jwt-token)**: `yarn add @nestjs/jwt`
   - **[_passport-jwt_](https://docs.nestjs.com/recipes/passport#jwt-functionality)**: `yarn add passport-jwt`, `yarn add --dev @types/passport-jwt`
   - **[_passport_](https://docs.nestjs.com/recipes/passport#authentication-requirements)**: `yarn add @nestjs/passport passport passport-local`, `yarn add --dev @types/passport-local`
+  - **[_swagger security_](https://github.com/LionC/express-basic-auth?tab=readme-ov-file#how-to-use)**: `yarn add express-basic-auth`
 
 - .env
 
@@ -60,6 +61,9 @@ MONGO_PASSWORD=P@ssw0rd
 MONGO_DBNAME=catdb
 
 MODE='dev'
+
+SWAGGER_USER=swagger
+SWAGGER_PASSWORD=1q2w3e4r5t@#
 ```
 
 ## MongoDB

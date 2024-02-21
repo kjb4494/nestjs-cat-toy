@@ -4,13 +4,23 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { CatsModule } from 'src/cats/cats.module';
 import { JwtStrategy } from './jwt/jwt.strategy';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt', session: true }),
-    JwtModule.register({
-      secret: 'secretKey',
-      signOptions: { expiresIn: '1y' },
+    // JwtModule.register({
+    //   secret: process.env.JWT_SECRET,
+    //   signOptions: { expiresIn: '30m' },
+    // }),
+    // 위 코드를 사용하면 .env에서 환경변수를 읽어오기 전에 register 되기 때문에 아래와 같이 작성
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '30m' },
+      }),
+      inject: [ConfigService],
     }),
     // https://docs.nestjs.com/fundamentals/circular-dependency#module-forward-reference
     forwardRef(() => CatsModule),

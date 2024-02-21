@@ -4,9 +4,21 @@ import { HttpExceptionFilter } from './http-exception.filter';
 import { SuccessInterceptor } from './common/interceptors/success.interceptor';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as expressBasicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // https://github.com/LionC/express-basic-auth?tab=readme-ov-file#how-to-use
+  app.use(
+    ['/docs', '/docs-json'],
+    expressBasicAuth({
+      challenge: true,
+      users: {
+        [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
+      },
+    }),
+  );
 
   // https://docs.nestjs.com/openapi/introduction#bootstrap
   const config = new DocumentBuilder()
